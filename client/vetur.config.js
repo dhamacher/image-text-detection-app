@@ -21,7 +21,7 @@ module.exports = {
         // Where is `package.json` in the project?
         // We use it to determine the version of vue.
         // It is relative to root property.
-        package: './client/package.json',
+        package: './package.json',
         // **optional**
         // Where is TypeScript config file in the project?
         // It is relative to root property.
@@ -35,7 +35,7 @@ module.exports = {
         // It is relative to root property.
         // Notice: It won't actually do it. You need to use `require.context` or `Vue.component`
         globalComponents: [
-          './client/src/components/**/*.vue'
+          './client/server/components/**/*.vue'
         ]
       }
     ]

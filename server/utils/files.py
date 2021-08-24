@@ -1,5 +1,5 @@
 from werkzeug.datastructures import FileStorage
-import src.config.config as cfg
+import server.config.config as cfg
 from pathlib import Path
 
 

@@ -1,3 +1,7 @@
+<!--
+This template is used to get a health check from the backend web server.
+A JSON object is returned with metadata from the server and the current status.
+-->
 <template>
   <div class="container">
     <div v-if="msg.length > 0" class='row-cols-1'>

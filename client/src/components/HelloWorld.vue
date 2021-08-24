@@ -1,3 +1,7 @@
+<!--
+HelloWorld example, the classic and most boring! I used this as a reference for props.
+TODO Remove this component since it is not really useful unless for reference purposes.
+-->
 <template>
   <div class="container">
     <div class="row-cols-1">

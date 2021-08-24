@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: need to fix layout and make it look smooth -->
   <div id="app" class="container-sm">
     <div id="nav" class="row">
       <router-link to="/">Home</router-link> |

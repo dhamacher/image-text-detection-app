@@ -1,9 +1,9 @@
 import numpy
 from werkzeug.datastructures import FileStorage
 
-from src.utils.files import save_image, save_text_to_file
-from src.ml.feature_engineering import binarization, bilateral_filter, apply_grayscale
-import src.config.config as cfg
+from server.utils.files import save_image, save_text_to_file
+from server.ml.feature_engineering import binarization, bilateral_filter, apply_grayscale
+import server.config.config as cfg
 import pytesseract
 from PIL import Image
 import numpy as np

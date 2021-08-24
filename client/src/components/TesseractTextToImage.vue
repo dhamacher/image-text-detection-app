@@ -1,4 +1,11 @@
+<!--
+This component uploads an image to the web server and extracts the text from that image.
+The text is than displayed as a result of the upload.
+-->
+
 <template>
+<!-- TODO: need to fix layout and make it look smooth. -->
+<!--  TODO: need a way to reset and send another image. -->
   <div class="container">
     <div class="row-cols-1">
       <h2>Select an image</h2>
