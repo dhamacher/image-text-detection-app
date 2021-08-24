@@ -21,9 +21,15 @@ For displaying images: https://stackoverflow.com/questions/45071661/how-can-i-di
 # Using Commands
 All commands are grouped by the root directory in which they are executed.
 
-## /src/client/
+## /client/
 ### Add a Vue Plugin
 Use command `vue add <name>`
 
+### Build the app
+Use command `npm run build`
+
 ### Run App
 use command `npm run serve` inside the **\src\client**
+
+### Run Production App in Preview Mode
+Use command `server -s dist`
