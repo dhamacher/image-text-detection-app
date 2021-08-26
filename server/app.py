@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sys
-from src.utils.files import save_image
+# from src.utils.files import save_image
 from src.ml.model import get_text_from_image
 import datetime as dt
 import json
@@ -13,7 +13,7 @@ error_response = { 'status': 'ERROR', 'exception': None }
 DEBUG = True
 ENV = 'DEV'
 
-_pwd = Path().cwd()
+_pwd = Path(__file__)
 sys.path.append(_pwd)
 
 
@@ -41,13 +41,13 @@ def health_check():
     return jsonify(json_payload)
 
 
-@app.route('/submitImage', methods=['POST'])
-def fetch_image():
-    # TODO: Build package with utility functions for this.
-    if request.method == "POST":
-        file_obj = request.files.get('file')
-        save_image(file_obj)
-    return jsonify('Nothing Happened!')
+# @app.route('/submitImage', methods=['POST'])
+# def fetch_image():
+#     # TODO: Build package with utility functions for this.
+#     if request.method == "POST":
+#         file_obj = request.files.get('file')
+#         save_image(file_obj)
+#     return jsonify('Nothing Happened!')
 
 
 @app.route('/getText', methods=['POST'])

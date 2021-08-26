@@ -1,5 +1,5 @@
-from server.src.ml.feature_engineering import binarization, apply_grayscale
-from server.src.utils.files import save_image, save_text_to_file
+from .feature_engineering import binarization, apply_grayscale
+from ..utils.files import save_image, save_text_to_file
 import numpy
 from werkzeug.datastructures import FileStorage
 
