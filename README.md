@@ -13,6 +13,8 @@ For uploading files I used https://masteringjs.io/tutorials/vue/file-upload
 
 For displaying images: https://stackoverflow.com/questions/45071661/how-can-i-display-image-by-image-uploaded-on-the-vue-component 
 
+Installing Tesseract-OCR on Linux: https://linuxhint.com/install-tesseract-ocr-linux/ 
+
 # Build Workflow
 
 1. Create new component with `<name>.vue`

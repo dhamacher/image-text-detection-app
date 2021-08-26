@@ -1,14 +1,25 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from server.utils.files import save_image
-from server.ml.model import get_text_from_image
+import sys
+from src.utils.files import save_image
+from src.ml.model import get_text_from_image
 import datetime as dt
 import json
+from pathlib import Path
 
 error_response = { 'status': 'ERROR', 'exception': None }
 
 # configuration
 DEBUG = True
+ENV = 'DEV'
+
+_pwd = Path().cwd()
+sys.path.append(_pwd)
+
+
+
+
+
 
 # instantiate the app
 app = Flask(__name__)

@@ -1,6 +1,0 @@
-IMAGE Bitemi>.4F
-
-eee |
-
-FROM AN IMAGE |
-
