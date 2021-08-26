@@ -54,4 +54,5 @@ def get_text():
 
 
 if __name__ == '__main__':
+    # TODO: Maintain a stateless app where storing of data is not neccessary.
     app.run()

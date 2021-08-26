@@ -1,9 +1,11 @@
+from server.utils.files import save_image, save_text_to_file
+from server.ml.feature_engineering import binarization, apply_grayscale
+import server.config.config as cfg
+
 import numpy
 from werkzeug.datastructures import FileStorage
 
-from server.utils.files import save_image, save_text_to_file
-from server.ml.feature_engineering import binarization, bilateral_filter, apply_grayscale
-import server.config.config as cfg
+
 import pytesseract
 from PIL import Image
 import numpy as np
@@ -34,6 +36,7 @@ def _logging_setup():
 
 def _get_features(image_array: numpy.ndarray):
     try:
+        # TODO: Study other image feature engineering techniques to imrpove performance.
         # featured_image_array1 = bilateral_filter(image_array)
         featured_image_array2 = apply_grayscale(image_array)
         featured_image_array3 = binarization(featured_image_array2)
@@ -47,6 +50,7 @@ def _get_features(image_array: numpy.ndarray):
 def get_text_from_image(image_file: FileStorage):
     try:
         log = _logging_setup()
+        # TODO: The accuracy of the model needs to be improved. How do I do that?
         tess_env = Path(str(os.getenv("TESSERACT_HOME")))
         tess_exec = tess_env / 'tesseract.exe'
         pytesseract.pytesseract.tesseract_cmd = tess_exec

@@ -1,12 +1,12 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col-2">        <img alt="Vue logo" src="../assets/logo.png" class="row-cols-1">
-        <HelloWorld msg="Get Text From Images" class="row-cols-1"/>
-        <TesseractTextToImage title="upload" class="row-cols-1"/>
+  <div class="container content-panel" >
+    <div class="row justify-content-center">
+      <div class="col-sm-10">
+        <img alt="Vue logo" src="../assets/logo.png">
+        <img alt="Vue logo" src="../assets/google_tesseract.png">
+        <HelloWorld msg="Get Text From Images"  />
+        <TesseractTextToImage title="upload" />
       </div>
-      <div class="col-3"></div>
     </div>
   </div>
 </template>
