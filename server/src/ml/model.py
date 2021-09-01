@@ -11,7 +11,7 @@ import logging
 
 ENV = os.getenv('APP_ENV')
 
-import server.src.config.config as cfg
+import src.config.config as cfg
 
 _image_path = Path(cfg.get_config(ENV)['image_path'])
 _logger = logging.getLogger(__name__)
