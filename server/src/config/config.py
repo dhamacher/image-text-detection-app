@@ -18,12 +18,12 @@ def get_config(environment = 'DEV'):
         }
     if environment == 'DOCKER-DEV':
         return {
-            'image_path': './uploaded_images',
-            'log_path': './logs',
+            'image_path': '../uploaded_images',
+            'log_path': '../logs',
             'tesseract_cmd': 'tesseract',
             'tesseract_config': "--oem 3 --psm 1 -c tessedit_char_whitelist= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.$/ '",
-            'text_output_path': './output',
-            'test_image_path': './data/alt text.jpg'
+            'text_output_path': '../output',
+            'test_image_path': '../data/alt text.jpg'
         }
     else:
         return None

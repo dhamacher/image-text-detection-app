@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 import logging
 
-ENV = os.getenv('APP_ENV')
+ENV = 'DOCKER-DEV' #os.getenv('APP_ENV')
 
 from ..config.config import get_config
 
