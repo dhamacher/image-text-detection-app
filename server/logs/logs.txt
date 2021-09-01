@@ -1,0 +1,21 @@
+2021-08-26 06:24:25,896 - src.ml.model - ERROR - 'NoneType' object has no attribute 'read'
+Traceback (most recent call last):
+  File "C:\Users\dhama\Projects\image-text-detection-app\server\venv\lib\site-packages\PIL\Image.py", line 2972, in open
+    fp.seek(0)
+AttributeError: 'NoneType' object has no attribute 'seek'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dhama\Projects\image-text-detection-app\server\src\ml\model.py", line 67, in get_text_from_image
+    image_file = Image.open(image_path)
+  File "C:\Users\dhama\Projects\image-text-detection-app\server\venv\lib\site-packages\PIL\Image.py", line 2974, in open
+    fp = io.BytesIO(fp.read())
+AttributeError: 'NoneType' object has no attribute 'read'
+2021-08-26 06:24:52,622 - src.ml.model - ERROR - 'dev'
+Traceback (most recent call last):
+  File "C:\Users\dhama\Projects\image-text-detection-app\server\src\ml\model.py", line 71, in get_text_from_image
+    custom_config = cfg.get_config('dev')['tesseract_config']
+  File "C:\Users\dhama\Projects\image-text-detection-app\server\src\config\config.py", line 12, in get_config
+    return configuration[environment]
+KeyError: 'dev'

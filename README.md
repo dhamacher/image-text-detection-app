@@ -1,5 +1,5 @@
 # Introduction
-Build an SPA that uploads an image and uses tesseract to display the text output of that image.
+This is a single page application (SPA) where users can upload an image and extract the text contained in that image.
 
 **Learning by doing:**
 1. First time using Vue.js or JavaScript in general.
