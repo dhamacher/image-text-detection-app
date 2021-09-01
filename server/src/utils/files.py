@@ -1,6 +1,6 @@
 from werkzeug.datastructures import FileStorage
 from pathlib import Path
-import server.src.config.config as cfg
+import src.config.config as cfg
 
 
 def save_image(file: FileStorage) -> Path:
