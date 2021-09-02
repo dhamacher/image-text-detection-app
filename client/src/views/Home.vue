@@ -1,5 +1,5 @@
 <template>
-  <div class="container content-panel" >
+  <div class="container content-panel justify-content-center" >
     <div class="row justify-content-center">
       <div class="col-sm-10">
         <img alt="Vue logo" src="../assets/logo.png">

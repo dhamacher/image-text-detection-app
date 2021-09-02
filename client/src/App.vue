@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="content-panel justify-content-center">
-    <div id="nav" class="row justify-content-center">
-      <div class="col-sm-10">
+    <div id="nav" class="row">
+      <div class="col justify-content-center">
         <router-link class="router-link" to="/" >Home</router-link>
         <router-link class="router-link" to="/about">About</router-link>
         <router-link class="router-link" to="/health-check">Status</router-link>

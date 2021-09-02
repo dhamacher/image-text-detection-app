@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     getMessage() {
-      const path = 'http://backend/health-check';
+      const path = 'http://localhost:5000/health-check';
       axios.get(path)
         .then((res) => {
           this.msg = res.data;

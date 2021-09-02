@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: '/health-check',
-    name: 'HealthCheck',
+    name: 'Status',
     component: HealthCheck
   }
 ]
