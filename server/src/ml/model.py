@@ -14,28 +14,28 @@ ENV = 'DOCKER-DEV' #os.getenv('APP_ENV')
 from ..config.config import get_config
 
 _image_path = Path(get_config(ENV)['image_path'])
-_logger = logging.getLogger(__name__)
+# _logger = logging.getLogger(__name__)
 
 
-def _logging_setup():
-    try:
-        log_path = Path(get_config(ENV)['log_path'])
-        filename = 'logs.txt'
-        dest = log_path / filename
-        _logger.setLevel(logging.DEBUG)
-        # create console handler and set level to debug
-        ch = logging.FileHandler(dest, mode='a', encoding=None, delay=False)
-        ch.setLevel(logging.DEBUG)
-        # create formatter
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        # add formatter to ch
-        ch.setFormatter(formatter)
-        # add ch to _logger
-        _logger.addHandler(ch)
-        return _logger
-    except Exception as e:
-        print(str(e))
-        raise(e)
+# def _logging_setup():
+#     try:
+#         log_path = Path(get_config(ENV)['log_path'])
+#         filename = 'logs.txt'
+#         dest = log_path / filename
+#         _logger.setLevel(logging.DEBUG)
+#         # create console handler and set level to debug
+#         ch = logging.FileHandler(dest, mode='a', encoding=None, delay=False)
+#         ch.setLevel(logging.DEBUG)
+#         # create formatter
+#         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+#         # add formatter to ch
+#         ch.setFormatter(formatter)
+#         # add ch to _logger
+#         _logger.addHandler(ch)
+#         return _logger
+#     except Exception as e:
+#         print(str(e))
+#         raise(e)
 
 
 def _get_features(image_array: numpy.ndarray):
@@ -52,9 +52,9 @@ def _get_features(image_array: numpy.ndarray):
 
 
 def get_text_from_image(image_file: FileStorage):
-    log = None
+    # log = None
     try:
-        log = _logging_setup()
+        # log = _logging_setup()
         tess_exec = Path(get_config(ENV)['tesseract_cmd'])
         pytesseract.pytesseract.tesseract_cmd = tess_exec
 
@@ -70,5 +70,5 @@ def get_text_from_image(image_file: FileStorage):
 
         return output
     except Exception as e:
-        log.exception(f'{str(e)}')
+        print(f'{str(e)}')
 
