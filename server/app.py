@@ -9,6 +9,7 @@ import json
 
 error_response = { 'status': 'ERROR', 'exception': None }
 DEBUG = os.getenv('FLASK_DEBUG')
+ENV = os.getenv('APP_ENV')
 
 # Create the application.
 app = Flask(__name__)
@@ -51,4 +52,8 @@ def get_text():
 
 
 if __name__ == '__main__':
-    app.run()
+    if ENV == 'DEV':
+        app.run(port=80)
+    elif ENV == 'DOCKER-DEV':
+        app.run(port=80)
+

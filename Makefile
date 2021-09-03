@@ -16,7 +16,7 @@ deploy-no-cache: build-app-no-cache
 	docker-compose up
 
 build-frontend:
-	docker build --no-cache --pull --rm -f "client\Dockerfile" -t imagetextdetectionapp:frontend-latest "client"
+	docker build --pull --rm -f "client\Dockerfile" -t imagetextdetectionapp:frontend-latest "client"
 
 build-backend:
-	docker build --no-cache --pull --rm -f "server\Dockerfile" -t imagetextdetectionapp:backend-latest "server"
+	docker build --pull --rm -f "server\Dockerfile" -t imagetextdetectionapp:backend-latest "server"
