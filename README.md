@@ -14,7 +14,8 @@ The following software packages are required to build and run the application lo
 * make
 
 # Build and Deploy with `make`
-The below table provides more details about the `make targets`. To use them run `make <Make Target>` in the project's root folder
+The below table provides more details about the `make targets` used to build, deploy, and run the application. 
+In order to use them, run the `make <Make Target>` command in the project's root folder.
 
 | Make Target | Description |
 |-------------|-------------|
