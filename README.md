@@ -3,8 +3,30 @@ This is a single page application (SPA) where users can upload an image and extr
 
 <img width="670" alt="1 0_landing_page" src="https://user-images.githubusercontent.com/2443514/132050954-a82b8187-ff8c-4205-bac8-dd39b55c9695.png">
 
+# Prerequisites
+The following software packages are required to build and run the application locally and in docker
 
-**Learning Outcomes:**
+* Docker Desktop +20.10.8
+* `chocolatey` package manager (Windows only)
+* npm
+* Python +3.9
+* Node JS
+* make
+
+# Build and Deploy with `make`
+The below table provides more details about the `make targets`. To use them run `make <Make Target>` in the project's root folder
+
+| Make Target | Description |
+|-------------|-------------|
+| `build-app` | Build the images |
+| `build-app-no-cache` | Build the images without cache |
+| `start-app` | Start the application (requires a build first) |
+| `stop-app` | Stop the application |
+
+
+# Learning Outcomes
+The following is a reflection on the learning outcomes while building this project.
+
 1. Use Vue.js and leverage Vue.js components.
 2. Provide Python API for feature extraction of uploaded images.
 3. Perform feature engineering on uploaded images using opencv.
@@ -16,7 +38,7 @@ This is a single page application (SPA) where users can upload an image and extr
 9. Deploy using a manifest on local kubernetes cluster.
 10. Deploy using a manifest on to Azure kubernetes cluster.
 
-## References
+# References
 * This project is based on a [tutorial for building SPA with Flask and Vue.js](https://testdriven.io/blog/developing-a-single-page-app-with-flask-and-vuejs/), which is a awesome resource to get started with Vue.js and Flask
 
 * This tutorial shows you how to [upload files with Vue.js](https://masteringjs.io/tutorials/vue/file-upload)
@@ -25,23 +47,24 @@ This is a single page application (SPA) where users can upload an image and extr
 
 * This resource is great to learn [how to install Tesseract-OCR on Linux](https://linuxhint.com/install-tesseract-ocr-linux/)
 
-# Build Workflow
+# Additional Information and Commands
+This section contains some helpful commands. Some require `npm` to be installed on your system.
 
-1. Create new component with `<name>.vue`
-2. Update client/src/router/index.js to map `/<name>` to the <name> component
+## Client Side Commands
+Run the following commands inside the `client/` folder
 
-# Using Commands
-All commands are grouped by the root directory in which they are executed.
+## Add a Vue Plugin
 
-## /client/
-### Add a Vue Plugin
-Use command `vue add <name>`
+    Use command `vue add <name>`
 
-### Build the app
-Use command `npm run build`
+## Build the Frontend App
 
-### Run App
-use command `npm run serve` inside the **\src\client**
+    Use command `npm run build`
 
-### Run Production App in Preview Mode
-Use command `server -s dist`
+## Run Fontend App
+
+    use command `npm run serve` inside the **\src\client**
+
+## Run Frontend App in Production Preview Mode
+
+    Use command `server -s dist`
