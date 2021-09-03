@@ -1,74 +1,91 @@
-from .feature_engineering import binarization, apply_grayscale
+from .feature_engineering import binarization, apply_grayscale, bilateral_filter
 from ..utils.files import save_image, save_text_to_file
-import numpy
-from werkzeug.datastructures import FileStorage
-import pytesseract
-from PIL import Image
-import numpy as np
-import os
-from pathlib import Path
-import logging
-
-ENV = 'DOCKER-DEV' #os.getenv('APP_ENV')
-
 from ..config.config import get_config
 
-_image_path = Path(get_config(ENV)['image_path'])
-# _logger = logging.getLogger(__name__)
+from werkzeug.datastructures import FileStorage
+from PIL import Image
+from pathlib import Path
 
+import pytesseract
+import numpy as np
+import os
+import matplotlib.pyplot as plt
 
-# def _logging_setup():
-#     try:
-#         log_path = Path(get_config(ENV)['log_path'])
-#         filename = 'logs.txt'
-#         dest = log_path / filename
-#         _logger.setLevel(logging.DEBUG)
-#         # create console handler and set level to debug
-#         ch = logging.FileHandler(dest, mode='a', encoding=None, delay=False)
-#         ch.setLevel(logging.DEBUG)
-#         # create formatter
-#         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-#         # add formatter to ch
-#         ch.setFormatter(formatter)
-#         # add ch to _logger
-#         _logger.addHandler(ch)
-#         return _logger
-#     except Exception as e:
-#         print(str(e))
-#         raise(e)
+ENV = os.getenv('APP_ENV')
 
-
-def _get_features(image_array: numpy.ndarray):
+def _get_image_array(image_file: FileStorage) -> np.ndarray:
     try:
+        image_path = save_image(image_file)
+        image_file = Image.open(image_path)
+        image_array = np.array(image_file)
+        return image_array
+    except Exception as e:
+        raise(e)
+
+
+def _save_feature_image(img_array: np.ndarray, path: Path):
+    try:
+        plt.figure(figsize=(10, 10))
+        plt.imshow(img_array)
+        plt.xticks([])
+        plt.yticks([])
+        plt.savefig(path, bbox_inches='tight')
+    except Exception as e:
+        raise(e)
+
+
+def _get_features(image_file: FileStorage) -> np.ndarray:
+    try:
+        output_path = Path(get_config(ENV)['feature_image_path'])
+        image_array = _get_image_array(image_file)
         # TODO: Study other image feature engineering techniques to improve performance.
-        # featured_image_array1 = bilateral_filter(image_array)
-        featured_image_array2 = apply_grayscale(image_array)
+
+        featured_image_array1 = bilateral_filter(image_array)
+        feature_filename = f'bilateral_filter_{Path(image_file.filename).name}'
+        _save_feature_image(featured_image_array1, output_path / feature_filename)
+
+        featured_image_array2 = apply_grayscale(featured_image_array1)
+        feature_filename = f'grayscale_{Path(image_file.filename).name}'
+        _save_feature_image(featured_image_array2, output_path / feature_filename)
+
         featured_image_array3 = binarization(featured_image_array2)
+        feature_filename = f'binarization_{Path(image_file.filename).name}'
+        _save_feature_image(featured_image_array3, output_path / feature_filename)
 
         final_image_array = featured_image_array3
         return final_image_array
     except Exception as e:
         print(str(e))
+        raise(e)
+
+
+def _valid_output(value: str) -> bool:
+    try:
+        if value == ' \n\f':
+            return False
+        else:
+            return True
+    except Exception as e:
+        raise(e)
 
 
 def get_text_from_image(image_file: FileStorage):
-    # log = None
     try:
-        # log = _logging_setup()
+        output_filename = f'{Path(image_file.filename).stem}.txt'
+        output_path = Path(get_config(ENV)['text_output_path'])
+        full_path = output_path / output_filename
         tess_exec = Path(get_config(ENV)['tesseract_cmd'])
         pytesseract.pytesseract.tesseract_cmd = tess_exec
-
-        image_path = save_image(image_file)
-        image_file = Image.open(image_path)
-        image_array = np.array(image_file)
-        processed_image_array = _get_features(image_array)
-
         custom_config = get_config(ENV)['tesseract_config']
-        output = pytesseract.image_to_string(processed_image_array, config=custom_config)
-        output_path = Path(get_config(ENV)['text_output_path'])
-        text_file_path = save_text_to_file(output_path, output)
+
+        feature_image_array = _get_features(image_file)
+
+        output = pytesseract.image_to_string(feature_image_array, config=custom_config)
+        if not _valid_output(output):
+            output = '=== NO TEXT DETECTED ==='
+
+        text_file_path = save_text_to_file(full_path, output)
 
         return output
     except Exception as e:
-        print(f'{str(e)}')
-
+        raise(e)

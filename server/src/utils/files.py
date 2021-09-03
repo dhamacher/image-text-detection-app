@@ -1,7 +1,10 @@
+from ..config.config import get_config
 from werkzeug.datastructures import FileStorage
 from pathlib import Path
-import src.config.config as cfg
 
+import os
+
+ENV = os.getenv('APP_ENV')
 
 def save_image(file: FileStorage) -> Path:
     """
@@ -14,20 +17,19 @@ def save_image(file: FileStorage) -> Path:
 
     """
     try:
-        path = Path(cfg.get_config('DEV')['image_path'])
+        path = Path(get_config(ENV)['image_path'])
         filename = str(file.filename)
         dest = path / filename
         file.save(dest)
         return dest
     except Exception as e:
         print(str(e))
+        raise(e)
 
 
-def save_text_to_file(path: Path, content: str, filename = "output.txt") -> Path:
+def save_text_to_file(path: Path, content: str) -> Path:
     try:
-        dest = path / filename
-        with open(dest, 'w') as f:
+        with open(path, 'w') as f:
             f.write(content)
     except Exception as e:
-        print(str(e))
-
+        raise(e)

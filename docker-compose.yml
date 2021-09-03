@@ -13,9 +13,8 @@ services:
 
   backend:
     image: imagetextdetectionapp:backend-latest
-    environment:
-      - APP_ENV=DOCKER-DEV
-      - FLASK_APP=app.py   
+    env_file:
+      - server-environment.env
     command: ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
     networks: 
       - itd_net

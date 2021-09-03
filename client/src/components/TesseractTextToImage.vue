@@ -45,7 +45,7 @@ export default {
           const formData = new FormData();
           formData.append('file', this.path);
           const headers = { 'Content-Type': 'multipart/form-data' };
-          axios.post('http://localhost:80/getText', formData, { headers }).then((res) => {
+          axios.post('http://localhost:5000/getText', formData, { headers }).then((res) => {
             res.data.files; // binary representation of the file
             res.status; // HTTP status
             this.output = res.data
