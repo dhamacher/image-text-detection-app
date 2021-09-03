@@ -1,5 +1,5 @@
 # Introduction
-Build an SPA that uploads an image and uses tesseract to display the text output of that image.
+This is a single page application (SPA) where users can upload an image and extract the text contained in that image.
 
 **Learning by doing:**
 1. First time using Vue.js or JavaScript in general.
@@ -13,6 +13,8 @@ For uploading files I used https://masteringjs.io/tutorials/vue/file-upload
 
 For displaying images: https://stackoverflow.com/questions/45071661/how-can-i-display-image-by-image-uploaded-on-the-vue-component 
 
+Installing Tesseract-OCR on Linux: https://linuxhint.com/install-tesseract-ocr-linux/ 
+
 # Build Workflow
 
 1. Create new component with `<name>.vue`
@@ -21,9 +23,15 @@ For displaying images: https://stackoverflow.com/questions/45071661/how-can-i-di
 # Using Commands
 All commands are grouped by the root directory in which they are executed.
 
-## /src/client/
+## /client/
 ### Add a Vue Plugin
 Use command `vue add <name>`
 
+### Build the app
+Use command `npm run build`
+
 ### Run App
 use command `npm run serve` inside the **\src\client**
+
+### Run Production App in Preview Mode
+Use command `server -s dist`

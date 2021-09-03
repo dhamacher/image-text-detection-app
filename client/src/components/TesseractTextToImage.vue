@@ -4,23 +4,20 @@ The text is than displayed as a result of the upload.
 -->
 
 <template>
-<!-- TODO: need to fix layout and make it look smooth. -->
-<!--  TODO: need a way to reset and send another image. -->
   <div class="container">
-    <div class="row-cols-1">
-      <h2>Select an image</h2>
-    </div>
-    <div v-if="!image" class="row-cols-1">
-      <input type="file" @change="uploadFile()" ref="file" class="form-control-file">
-    </div>
-    <div v-else class="row-cols-1">
-      <img id="output" width="200" :src="image" class="img-rounded" alt="No Image" />
-    </div>
-    <div class="row-cols-1">
-      <button @click="submitFile" class="btn btn-primary">Upload!</button>
-    </div>
-    <div class="row-cols-1">
-      <p>{{ output }}</p>
+    <div class="row justify-content-center">
+      <div v-if="!image" class="col-sm-10">
+          <h2 class="component-layout">Select an image</h2>
+          <input class="component-layout form-control form-control-lg" type="file" @change="uploadFile()" ref="file" >
+      </div>
+      <div v-else class="col-sm-10">
+        <h2 class="component-layout">Select an image</h2>
+        <input class="form-control form-control-lg component-layout" type="file" @change="uploadFile()" ref="file" >
+          <img id="output" :src="image" class="img-rounded img-fluid component-layout" alt="No Image" />
+          <button @click="submitFile" class="btn btn-primary btn-lg component-layout">Extract Text</button>
+<!--          TODO: Beautify the text output, add pasting to clipboard, download as a file (radio buttons?) -->
+          <p class="component-layout">{{ output }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -48,7 +45,7 @@ export default {
           const formData = new FormData();
           formData.append('file', this.path);
           const headers = { 'Content-Type': 'multipart/form-data' };
-          axios.post('http://localhost:5000/getText', formData, { headers }).then((res) => {
+          axios.post('http://localhost:80/getText', formData, { headers }).then((res) => {
             res.data.files; // binary representation of the file
             res.status; // HTTP status
             this.output = res.data
@@ -64,3 +61,8 @@ export default {
       },
 };
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+</style>
