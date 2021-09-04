@@ -56,7 +56,7 @@ Run the following commands inside the `client/` folder
 
 ## Add a Vue Plugin
 
-    Use command `vue add <name>`
+    vue add <name>
 
 ## Build the Frontend App
 
