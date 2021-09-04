@@ -1,4 +1,4 @@
-from .feature_engineering import binarization, apply_grayscale, bilateral_filter
+from .feature_engineering import binarization, apply_grayscale, bilateral_filter, remove_alpha_channel
 from ..utils.files import save_image, save_text_to_file
 from ..config.config import get_config
 
@@ -69,16 +69,33 @@ def _valid_output(value: str) -> bool:
         raise(e)
 
 
+def _image_preprocessing(image_file: FileStorage):
+    try:
+        output_path = Path(get_config(ENV)['feature_image_path'])
+        feature_filename = f'alpha_channel_removed_{Path(image_file.filename).name}'
+        img = _get_image_array(image_file)
+        if Path(image_file.filename).suffix == '.png':
+            im = remove_alpha_channel(img)
+            _save_feature_image(im, output_path / feature_filename)
+            mod_image_file = FileStorage(output_path / feature_filename)
+            return mod_image_file
+        return image_file
+    except Exception as e:
+        print(str(e))
+
+
 def get_text_from_image(image_file: FileStorage):
     try:
+        config = get_config(ENV)
         output_filename = f'{Path(image_file.filename).stem}.txt'
-        output_path = Path(get_config(ENV)['text_output_path'])
+        output_path = Path(config['text_output_path'])
         full_path = output_path / output_filename
-        tess_exec = Path(get_config(ENV)['tesseract_cmd'])
+        tess_exec = Path(config['tesseract_cmd'])
         pytesseract.pytesseract.tesseract_cmd = tess_exec
-        custom_config = get_config(ENV)['tesseract_config']
+        custom_config = config['tesseract_config']
 
-        feature_image_array = _get_features(image_file)
+        mod_image_file = _image_preprocessing(image_file)
+        feature_image_array = _get_features(mod_image_file)
 
         output = pytesseract.image_to_string(feature_image_array, config=custom_config)
         if not _valid_output(output):

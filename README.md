@@ -12,6 +12,16 @@ The following software packages are required to build and run the application lo
 * Python +3.9
 * Node JS
 * make
+* Vue CLI
+* ImageMagick
+
+# Setup
+Install vue clie service using
+
+    npm install @vue/cli-service -g
+
+
+
 
 # Build and Deploy with `make`
 The below table provides more details about the `make targets` used to build, deploy, and run the application. 
@@ -47,6 +57,8 @@ The following is a reflection on the learning outcomes while building this proje
 * This resource is for [displaying images in Vue.js](https://stackoverflow.com/questions/45071661/how-can-i-display-image-by-image-uploaded-on-the-vue-component)
 
 * This resource is great to learn [how to install Tesseract-OCR on Linux](https://linuxhint.com/install-tesseract-ocr-linux/)
+
+* Use [ImageMagick with Python](https://www.pythonpool.com/imagemagick-python/) 
 
 # Additional Information and Commands
 This section contains some helpful commands. Some require `npm` to be installed on your system.
