@@ -14,6 +14,8 @@ RUN pip3 install -r requirements.txt && \
     mkdir -p logs && \
     export PYTHONPATH=/server/src && \
     export APP_ENV=DOCKER-DEV
-COPY . .
+COPY src .
+COPY app.py .
+COPY requirements.txt .
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

@@ -16,8 +16,8 @@ ENV = os.getenv('APP_ENV')
 def _get_image_array(image_file: FileStorage) -> np.ndarray:
     try:
         image_path = save_image(image_file)
-        image_file = Image.open(image_path)
-        image_array = np.array(image_file)
+        image = Image.open(image_path)
+        image_array = np.array(image)
         return image_array
     except Exception as e:
         raise(e)
@@ -69,19 +69,20 @@ def _valid_output(value: str) -> bool:
         raise(e)
 
 
-def _image_preprocessing(image_file: FileStorage):
-    try:
-        output_path = Path(get_config(ENV)['feature_image_path'])
-        feature_filename = f'alpha_channel_removed_{Path(image_file.filename).name}'
-        img = _get_image_array(image_file)
-        if Path(image_file.filename).suffix == '.png':
-            im = remove_alpha_channel(img)
-            _save_feature_image(im, output_path / feature_filename)
-            mod_image_file = FileStorage(output_path / feature_filename)
-            return mod_image_file
-        return image_file
-    except Exception as e:
-        print(str(e))
+# def _image_preprocessing(image_file: FileStorage) -> np.ndarray:
+#     try:
+#         output_path = Path(get_config(ENV)['feature_image_path'])
+#         feature_filename = f'alpha_channel_removed_{Path(image_file.filename).name}'
+#         img = _get_image_array(image_file)
+#         if Path(image_file.filename).suffix == '.png':
+#             im = remove_alpha_channel(img)
+#             _save_feature_image(im, output_path / feature_filename)
+#             with open(output_path / feature_filename, 'rb') as fp:
+#                 mod_file = FileStorage(fp)
+#             return mod_file
+#         return image_file
+#     except Exception as e:
+#         print(str(e))
 
 
 def get_text_from_image(image_file: FileStorage):
@@ -94,10 +95,10 @@ def get_text_from_image(image_file: FileStorage):
         pytesseract.pytesseract.tesseract_cmd = tess_exec
         custom_config = config['tesseract_config']
 
-        mod_image_file = _image_preprocessing(image_file)
-        feature_image_array = _get_features(mod_image_file)
+        # preprocessed_image_file = _image_preprocessing(image_file)
+        feature_array = _get_features(image_file)
 
-        output = pytesseract.image_to_string(feature_image_array, config=custom_config)
+        output = pytesseract.image_to_string(feature_array, config=custom_config)
         if not _valid_output(output):
             output = '=== NO TEXT DETECTED ==='
 

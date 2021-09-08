@@ -39,9 +39,7 @@ def get_text():
     try:
         if request.method == "POST":
             file_obj = request.files.get('file')
-            # print('Call get_text_from_image')
             result = get_text_from_image(file_obj)
-            # print('Returned from get_text_from_image')
             return jsonify(result)
         else:
             error_response['exception'] = 'Non POST request not valid!'
@@ -52,8 +50,4 @@ def get_text():
 
 
 if __name__ == '__main__':
-    if ENV == 'DEV':
-        app.run(port=80)
-    elif ENV == 'DOCKER-DEV':
-        app.run(port=80)
-
+    app.run()

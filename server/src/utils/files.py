@@ -6,7 +6,7 @@ import os
 
 ENV = os.getenv('APP_ENV')
 
-def save_image(file: FileStorage) -> Path:
+def save_image(image_file: FileStorage) -> Path:
     """
     Saves an image file to disk.
     Args:
@@ -18,9 +18,9 @@ def save_image(file: FileStorage) -> Path:
     """
     try:
         path = Path(get_config(ENV)['image_path'])
-        filename = str(file.filename)
+        filename = str(image_file.filename)
         dest = path / filename
-        file.save(dest)
+        image_file.save(dest)
         return dest
     except Exception as e:
         print(str(e))

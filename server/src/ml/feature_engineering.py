@@ -4,11 +4,11 @@ import cv2
 
 def remove_alpha_channel(img: numpy.ndarray):
     try:
-        # make mask of where the transparent bits are
-        trans_mask = img[:, :, 3] == 0
-
-        # replace areas of transparency with white and not transparent
-        img[trans_mask] = [255, 255, 255, 255]
+        # # make mask of where the transparent bits are
+        # trans_mask = img[:, :, 3] == 0
+        #
+        # # replace areas of transparency with white and not transparent
+        # img[trans_mask] = [255, 255, 255, 255]
 
         # new image without alpha channel...
         im = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
