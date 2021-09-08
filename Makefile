@@ -20,3 +20,7 @@ build-frontend:
 
 build-backend:
 	docker build --pull --rm -f "server\Dockerfile" -t imagetextdetectionapp:backend-latest "server"
+
+convert-to-k8s:
+	kompose convert
+	MOVE /Y ./*.yaml ./k8s/

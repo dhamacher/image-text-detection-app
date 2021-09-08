@@ -60,8 +60,28 @@ The following is a reflection on the learning outcomes while building this proje
 
 * Use [ImageMagick with Python](https://www.pythonpool.com/imagemagick-python/) 
 
+* The [`Kompose`](https://kubernetes.io/docs/tasks/configure-pod-container/translate-compose-kubernetes/) utility is an awesome tool to go from docker-compose to kubernetes in minutes.
+
 # Additional Information and Commands
 This section contains some helpful commands. Some require `npm` to be installed on your system.
+
+## Convert `docker-compose` to Kubernetes Manifest Files
+Run the following command in the projects root directory:
+
+    kompose convert
+
+## Create the ConfigMap
+
+    kubectl create configmap server-environment-env --from-file=./k8s/server-environment-env-configmap.yaml  
+
+## Delete the ConfigMap
+
+    kubectl delete configmap server-environment-env
+
+## Deploy to Kubernetes
+
+    kubectl apply -f k8s/backend-deployment.yaml, k8s/frontend-deployment.yaml, k8s/frontend-service.yaml, k8s/idt_net-networkpolicy.yaml
+
 
 ## Client Side Commands
 Run the following commands inside the `client/` folder

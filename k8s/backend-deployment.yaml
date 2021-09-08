@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: backend
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/itd_net: "true"
+        io.kompose.service: backend
+    spec:
+      containers:
+      - args:
+        - python3
+        - -m
+        - flask
+        - run
+        - --host=0.0.0.0
+        env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              key: APP_ENV
+              name: server-environment-env
+        - name: FLASK_APP
+          valueFrom:
+            configMapKeyRef:
+              key: FLASK_APP
+              name: server-environment-env
+        - name: FLASK_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              key: FLASK_DEBUG
+              name: server-environment-env
+        - name: FLASK_ENV
+          valueFrom:
+            configMapKeyRef:
+              key: FLASK_ENV
+              name: server-environment-env
+        - name: FLASK_RUN_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: FLASK_RUN_PORT
+              name: server-environment-env
+        image: imagetextdetectionapp:backend-latest
+        imagePullPolicy: ""
+        name: backend
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
